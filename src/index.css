@@ -1,4 +1,11 @@
-// 📁 src/index.css
+/* =========================
+   📁 src/index.css
+   ========================= */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ⚠️ IMPORTANTE:
+   En archivos CSS NO puedes usar // comentarios
+   Solo /* comentario */
+*/
