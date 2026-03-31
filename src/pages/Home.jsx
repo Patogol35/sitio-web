@@ -6,12 +6,6 @@ import ProjectCard from "../components/ProjectCard";
 import Footer from "../components/Footer";
 import news from "../data/news";
 import projects from "../data/projects";
-import {
-  HeartHandshake,
-  GraduationCap,
-  HandHelping,
-  Sparkles,
-} from "lucide-react";
 
 function Home() {
   return (
@@ -71,22 +65,22 @@ function Home() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                icon: <HeartHandshake size={28} />,
+                icon: "🤝",
                 title: "Ayuda social",
                 text: "Apoyamos a familias y personas en situación vulnerable mediante asistencia y acompañamiento.",
               },
               {
-                icon: <GraduationCap size={28} />,
+                icon: "🎓",
                 title: "Educación",
                 text: "Promovemos oportunidades educativas y acceso a recursos para niños y jóvenes.",
               },
               {
-                icon: <HandHelping size={28} />,
+                icon: "💚",
                 title: "Voluntariado",
                 text: "Fomentamos la participación de personas comprometidas con el cambio social.",
               },
               {
-                icon: <Sparkles size={28} />,
+                icon: "✨",
                 title: "Actividades solidarias",
                 text: "Desarrollamos campañas, jornadas y eventos de impacto comunitario.",
               },
@@ -95,7 +89,7 @@ function Home() {
                 key={index}
                 className="rounded-3xl bg-slate-50 p-8 shadow-sm ring-1 ring-slate-200 transition hover:-translate-y-1 hover:shadow-xl"
               >
-                <div className="mb-5 inline-flex rounded-2xl bg-emerald-100 p-4 text-emerald-700">
+                <div className="mb-5 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-100 text-3xl">
                   {item.icon}
                 </div>
                 <h3 className="text-xl font-bold text-slate-900">{item.title}</h3>
