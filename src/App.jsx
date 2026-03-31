@@ -1,9 +1,21 @@
-function App() {
+// 📁 src/App.jsx
+import { Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import News from "./pages/News";
+import Donate from "./pages/Donate";
+import Navbar from "./components/Navbar";
+
+export default function App() {
   return (
-    <div className="min-h-screen bg-red-600 text-white flex items-center justify-center text-5xl font-black">
-      TAILWIND
+    <div className="font-sans">
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/donate" element={<Donate />} />
+      </Routes>
     </div>
   );
 }
-
-export default App;
