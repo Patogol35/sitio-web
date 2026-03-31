@@ -1,18 +1,21 @@
+// =========================
 // 📁 src/pages/News.jsx
-const newsMock = [
-  { id: 1, title: "Entrega de alimentos", content: "Se realizó entrega en comunidad." },
-  { id: 2, title: "Campaña médica", content: "Atención gratuita realizada." }
+// =========================
+const news = [
+  { title: "Entrega de alimentos", desc: "Ayuda a familias necesitadas." },
+  { title: "Brigada médica", desc: "Atención gratuita comunitaria." },
+  { title: "Campaña escolar", desc: "Entrega de útiles." },
 ];
 
 export default function News() {
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Noticias</h2>
-      <div className="grid gap-4">
-        {newsMock.map((n) => (
-          <div key={n.id} className="border p-4 rounded shadow">
-            <h3 className="font-bold">{n.title}</h3>
-            <p>{n.content}</p>
+    <div className="p-10">
+      <h2 className="text-3xl font-bold mb-6 text-green-600">Noticias</h2>
+      <div className="grid md:grid-cols-3 gap-6">
+        {news.map((n, i) => (
+          <div key={i} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition">
+            <h3 className="font-bold text-lg mb-2">{n.title}</h3>
+            <p className="text-gray-600">{n.desc}</p>
           </div>
         ))}
       </div>
