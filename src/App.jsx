@@ -1,21 +1,19 @@
-// 📁 src/App.jsx
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import News from "./pages/News";
-import Donate from "./pages/Donate";
 import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 
-export default function App() {
+function App() {
   return (
-    <div className="font-sans">
+    <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/donate" element={<Donate />} />
-      </Routes>
-    </div>
+      <Home />
+      <Dashboard />
+      <Contact />
+      <Footer />
+    </>
   );
 }
+
+export default App;
