@@ -15,33 +15,35 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: "#1B5E20",
+        background: "linear-gradient(135deg, #1B5E20, #2E7D32)",
         color: "#fff",
-        mt: 5,
-        pt: 5,
+        mt: 6,
+        pt: 6,
         pb: 3,
       }}
     >
-      <Container maxWidth="lg">
-        <Grid container spacing={4}>
+      <Container maxWidth="md">
+        <Grid container spacing={4} justifyContent="center" textAlign="center">
           
-          {/* LOGO / INFO */}
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6" fontWeight="bold" gutterBottom>
+          {/* LOGO */}
+          <Grid item xs={12}>
+            <Typography variant="h5" fontWeight="bold" gutterBottom>
               🐾 VetCare
             </Typography>
-            <Typography variant="body2">
+
+            <Typography variant="body2" sx={{ opacity: 0.8 }}>
               Cuidamos la salud y bienestar de tus mascotas con amor ❤️
             </Typography>
           </Grid>
 
           {/* NAVEGACIÓN */}
-          <Grid item xs={12} md={4}>
-            <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              Navegación
-            </Typography>
-
-            <Box display="flex" flexDirection="column" gap={1}>
+          <Grid item xs={12}>
+            <Box
+              display="flex"
+              justifyContent="center"
+              gap={3}
+              flexWrap="wrap"
+            >
               <MuiLink component={Link} to="/" color="inherit" underline="hover">
                 Inicio
               </MuiLink>
@@ -64,33 +66,54 @@ const Footer = () => {
             </Box>
           </Grid>
 
-          {/* CONTACTO */}
-          <Grid item xs={12} md={4}>
-            <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              Contacto
-            </Typography>
-
-            <Box display="flex" gap={1}>
-              <IconButton color="inherit">
+          {/* REDES */}
+          <Grid item xs={12}>
+            <Box display="flex" justifyContent="center" gap={2}>
+              <IconButton
+                sx={{
+                  color: "#fff",
+                  transition: "0.3s",
+                  "&:hover": { transform: "scale(1.2)" },
+                }}
+              >
                 <FacebookIcon />
               </IconButton>
-              <IconButton color="inherit">
+
+              <IconButton
+                sx={{
+                  color: "#fff",
+                  transition: "0.3s",
+                  "&:hover": { transform: "scale(1.2)" },
+                }}
+              >
                 <WhatsAppIcon />
               </IconButton>
-              <IconButton color="inherit">
+
+              <IconButton
+                sx={{
+                  color: "#fff",
+                  transition: "0.3s",
+                  "&:hover": { transform: "scale(1.2)" },
+                }}
+              >
                 <EmailIcon />
               </IconButton>
             </Box>
 
-            <Typography variant="body2" mt={1}>
+            <Typography variant="body2" mt={1} sx={{ opacity: 0.8 }}>
               contacto@vetcare.com
             </Typography>
           </Grid>
         </Grid>
 
         {/* COPYRIGHT */}
-        <Box textAlign="center" mt={4} borderTop="1px solid rgba(255,255,255,0.2)" pt={2}>
-          <Typography variant="body2">
+        <Box
+          textAlign="center"
+          mt={4}
+          pt={2}
+          sx={{ borderTop: "1px solid rgba(255,255,255,0.2)" }}
+        >
+          <Typography variant="body2" sx={{ opacity: 0.7 }}>
             © {new Date().getFullYear()} VetCare - Todos los derechos reservados
           </Typography>
         </Box>
