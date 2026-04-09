@@ -1,16 +1,12 @@
 import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import AppRouter from "./routes/AppRouter";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Home />
-      <Dashboard />
-      <Contact />
+      <AppRouter />
       <Footer />
     </>
   );
