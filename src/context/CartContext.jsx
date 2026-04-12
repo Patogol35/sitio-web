@@ -2,7 +2,6 @@ import { createContext, useContext, useState } from "react";
 
 const CartContext = createContext();
 
-// Provider
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
@@ -11,6 +10,8 @@ export const CartProvider = ({ children }) => {
     const existing = cart.find((item) => item.id === product.id);
 
     if (existing) {
+      if (existing.quantity >= product.stock) return;
+
       setCart(
         cart.map((item) =>
           item.id === product.id
@@ -23,29 +24,38 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // ➖ Quitar producto
-  const removeFromCart = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
+  // ➕ Incrementar
+  const increaseQuantity = (id) => {
+    setCart((prev) =>
+      prev.map((item) => {
+        if (item.id === id) {
+          if (item.quantity >= item.stock) return item;
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      })
+    );
   };
 
-  // 🔄 Disminuir cantidad
+  // ➖ Disminuir
   const decreaseQuantity = (id) => {
-    const item = cart.find((item) => item.id === id);
-
-    if (item.quantity === 1) {
-      removeFromCart(id);
-    } else {
-      setCart(
-        cart.map((item) =>
+    setCart((prev) =>
+      prev
+        .map((item) =>
           item.id === id
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )
-      );
-    }
+        .filter((item) => item.quantity > 0)
+    );
   };
 
-  // 🧹 Limpiar carrito
+  // ❌ Eliminar
+  const removeFromCart = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
+
+  // 🧹 Limpiar
   const clearCart = () => {
     setCart([]);
   };
@@ -56,7 +66,7 @@ export const CartProvider = ({ children }) => {
     0
   );
 
-  // 🔢 Total de items
+  // 🔢 Total items
   const totalItems = cart.reduce(
     (acc, item) => acc + item.quantity,
     0
@@ -67,8 +77,9 @@ export const CartProvider = ({ children }) => {
       value={{
         cart,
         addToCart,
-        removeFromCart,
+        increaseQuantity,
         decreaseQuantity,
+        removeFromCart,
         clearCart,
         total,
         totalItems,
@@ -79,5 +90,4 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-// Hook
 export const useCart = () => useContext(CartContext);
