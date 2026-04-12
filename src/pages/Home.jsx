@@ -28,20 +28,13 @@ const Home = () => {
   return (
     <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh", py: 6 }}>
       <Container maxWidth="lg">
-        
-        {/* Título */}
         <Typography
           variant="h4"
-          sx={{
-            fontWeight: 700,
-            mb: 4,
-            color: "#111",
-          }}
+          sx={{ fontWeight: 700, mb: 4 }}
         >
           Catálogo
         </Typography>
 
-        {/* Filtros */}
         <Box sx={{ mb: 5 }}>
           <Box sx={{ mb: 2 }}>
             <SearchBar search={search} setSearch={setSearch} />
@@ -54,16 +47,17 @@ const Home = () => {
           />
         </Box>
 
-        {/* Grid */}
-        <Grid container spacing={4}>
+        {/* 🔥 GRID BIEN CENTRADO */}
+        <Grid container spacing={4} justifyContent="center">
           {filtered.map((product) => (
             <Grid
               item
+              key={product.id}
               xs={12}
               sm={6}
               md={4}
               lg={3}
-              key={product.id}
+              sx={{ display: "flex", justifyContent: "center" }}
             >
               <ProductCard product={product} />
             </Grid>
