@@ -1,112 +1,26 @@
-import { useState } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  Box,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from "react-router-dom";
+import { AppBar, Toolbar, Typography, IconButton, Badge } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useCart } from "../context/CartContext";
 
-const navItems = [
-  { label: "Inicio", path: "/" },
-  { label: "Mascotas", path: "/dashboard" },
-  { label: "Contacto", path: "/contacto" },
-];
+const Navbar = ({ openCart }) => {
+  const { cart } = useCart();
 
-const Navbar = () => {
-  const [open, setOpen] = useState(false);
-
-  const toggleDrawer = (state) => () => {
-    setOpen(state);
-  };
+  const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <>
-      <AppBar
-        position="sticky"
-        elevation={2}
-        sx={{
-          background: "#2E7D32",
-        }}
-      >
-        <Toolbar sx={{ justifyContent: "space-between" }}>
-          
-          {/* LOGO */}
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: "bold",
-              letterSpacing: 1,
-            }}
-          >
-            🐾 VetCare
-          </Typography>
+    <AppBar position="sticky" color="default" elevation={2}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Typography variant="h6" fontWeight="bold">
+          TechStore
+        </Typography>
 
-          {/* DESKTOP MENU */}
-          <Box sx={{ display: { xs: "none", md: "flex" }, gap: 2 }}>
-            {navItems.map((item) => (
-              <Button
-                key={item.label}
-                component={Link}
-                to={item.path}
-                sx={{
-                  color: "#fff",
-                  fontWeight: 500,
-                  textTransform: "none",
-                  "&:hover": {
-                    backgroundColor: "rgba(255,255,255,0.1)",
-                  },
-                }}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Box>
-
-          {/* MOBILE MENU ICON */}
-          <IconButton
-            color="inherit"
-            edge="end"
-            onClick={toggleDrawer(true)}
-            sx={{ display: { xs: "flex", md: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-      {/* DRAWER MOBILE */}
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-          
-          <Typography
-            variant="h6"
-            sx={{ p: 2, fontWeight: "bold", color: "#2E7D32" }}
-          >
-            🐾 VetCare
-          </Typography>
-
-          <Divider />
-
-          <List>
-            {navItems.map((item) => (
-              <ListItem button key={item.label} component={Link} to={item.path}>
-                <ListItemText primary={item.label} />
-              </ListItem>
-            ))}
-          </List>
-
-        </Box>
-      </Drawer>
-    </>
+        <IconButton onClick={openCart}>
+          <Badge badgeContent={totalItems} color="error">
+            <ShoppingCartIcon />
+          </Badge>
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 };
 
