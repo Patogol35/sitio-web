@@ -1,38 +1,43 @@
-import { sendToWhatsApp } from "../utils/whatsapp";
+import { Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import { useCart } from "../context/CartContext";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+
   return (
-    <div style={styles.card}>
-      <img src={product.image} alt={product.name} style={styles.image} />
-      <h3>{product.name}</h3>
-      <p>${product.price}</p>
+    <Card sx={{ borderRadius: 4, boxShadow: 3 }}>
+      <CardMedia
+        component="img"
+        height="180"
+        image={product.image}
+        alt={product.name}
+      />
 
-      <button onClick={() => sendToWhatsApp(product)} style={styles.button}>
-        Pedir por WhatsApp
-      </button>
-    </div>
+      <CardContent>
+        <Typography variant="subtitle2" color="primary">
+          {product.category}
+        </Typography>
+
+        <Typography variant="h6" fontWeight="bold">
+          {product.name}
+        </Typography>
+
+        <Typography variant="h6" sx={{ mt: 1 }}>
+          ${product.price}
+        </Typography>
+
+        <Button
+          fullWidth
+          variant="contained"
+          color="success"
+          sx={{ mt: 2, borderRadius: 3 }}
+          onClick={() => addToCart(product)}
+        >
+          Agregar al carrito
+        </Button>
+      </CardContent>
+    </Card>
   );
-};
-
-const styles = {
-  card: {
-    border: "1px solid #ddd",
-    padding: "15px",
-    borderRadius: "10px",
-    textAlign: "center"
-  },
-  image: {
-    width: "100%",
-    borderRadius: "10px"
-  },
-  button: {
-    backgroundColor: "#25D366",
-    color: "white",
-    border: "none",
-    padding: "10px",
-    borderRadius: "5px",
-    cursor: "pointer"
-  }
 };
 
 export default ProductCard;
