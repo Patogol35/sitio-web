@@ -4,8 +4,7 @@ import {
   CardContent,
   Typography,
   Button,
-  Chip,
-  Stack
+  Box
 } from "@mui/material";
 import { useCart } from "../context/CartContext";
 
@@ -15,80 +14,92 @@ const ProductCard = ({ product }) => {
   return (
     <Card
       sx={{
-        borderRadius: 4,
+        borderRadius: 5,
         overflow: "hidden",
-        transition: "0.3s",
-        boxShadow: 3,
+        backgroundColor: "#fff",
+        boxShadow: "0 8px 30px rgba(0,0,0,0.05)",
+        transition: "all 0.3s ease",
         "&:hover": {
-          transform: "translateY(-8px)",
-          boxShadow: 6,
+          transform: "translateY(-6px)",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.08)",
         },
       }}
     >
       {/* Imagen */}
-      <CardMedia
-        component="img"
-        height="220"
-        image={product.image}
-        alt={product.name}
-        sx={{
-          objectFit: "cover",
-        }}
-      />
+      <Box sx={{ overflow: "hidden" }}>
+        <CardMedia
+          component="img"
+          image={product.image}
+          alt={product.name}
+          sx={{
+            height: 240,
+            objectFit: "cover",
+            transition: "transform 0.4s ease",
+            "&:hover": {
+              transform: "scale(1.05)",
+            },
+          }}
+        />
+      </Box>
 
-      <CardContent>
-        <Stack spacing={1}>
-          {/* Categoría */}
-          <Chip
-            label={product.category}
-            color="primary"
-            size="small"
-            sx={{ width: "fit-content" }}
-          />
+      <CardContent sx={{ p: 3 }}>
+        {/* Nombre */}
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: 600,
+            color: "#1a1a1a",
+            mb: 1,
+            minHeight: 48,
+          }}
+        >
+          {product.name}
+        </Typography>
 
-          {/* Nombre */}
+        {/* Categoría */}
+        <Typography
+          variant="body2"
+          sx={{
+            color: "#888",
+            mb: 2,
+          }}
+        >
+          {product.category}
+        </Typography>
+
+        {/* Precio + botón */}
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+        >
           <Typography
             variant="h6"
-            fontWeight="bold"
             sx={{
-              minHeight: 50,
+              fontWeight: 700,
+              color: "#111",
             }}
-          >
-            {product.name}
-          </Typography>
-
-          {/* Precio */}
-          <Typography
-            variant="h5"
-            color="success.main"
-            fontWeight="bold"
           >
             ${product.price}
           </Typography>
 
-          {/* Stock */}
-          <Typography variant="body2" color="text.secondary">
-            Stock: {product.stock}
-          </Typography>
-
-          {/* Botón */}
           <Button
-            fullWidth
             variant="contained"
-            color="success"
-            sx={{
-              mt: 1,
-              borderRadius: 3,
-              textTransform: "none",
-              fontWeight: "bold",
-              py: 1.2,
-            }}
+            size="small"
             onClick={() => addToCart(product)}
-            disabled={product.stock === 0}
+            sx={{
+              borderRadius: "999px",
+              textTransform: "none",
+              px: 2,
+              backgroundColor: "#111",
+              "&:hover": {
+                backgroundColor: "#333",
+              },
+            }}
           >
-            {product.stock === 0 ? "Sin stock" : "Agregar al carrito"}
+            Añadir
           </Button>
-        </Stack>
+        </Box>
       </CardContent>
     </Card>
   );
