@@ -16,8 +16,12 @@ const ProductCard = ({ product }) => {
       sx={{
         borderRadius: 5,
         overflow: "hidden",
-        backgroundColor: "#fff",
-        boxShadow: "0 8px 30px rgba(0,0,0,0.05)",
+        maxWidth: 300,
+        mx: "auto", // 🔥 centra la card
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        boxShadow: "0 8px 25px rgba(0,0,0,0.05)",
         transition: "all 0.3s ease",
         "&:hover": {
           transform: "translateY(-6px)",
@@ -26,15 +30,25 @@ const ProductCard = ({ product }) => {
       }}
     >
       {/* Imagen */}
-      <Box sx={{ overflow: "hidden" }}>
+      <Box
+        sx={{
+          height: 220,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: "#f5f5f5",
+          overflow: "hidden",
+        }}
+      >
         <CardMedia
           component="img"
           image={product.image}
           alt={product.name}
           sx={{
-            height: 240,
-            objectFit: "cover",
-            transition: "transform 0.4s ease",
+            maxHeight: "90%",
+            maxWidth: "90%",
+            objectFit: "contain", // 🔥 NO se deforma
+            transition: "0.3s",
             "&:hover": {
               transform: "scale(1.05)",
             },
@@ -42,62 +56,58 @@ const ProductCard = ({ product }) => {
         />
       </Box>
 
-      <CardContent sx={{ p: 3 }}>
-        {/* Nombre */}
-        <Typography
-          variant="h6"
-          sx={{
-            fontWeight: 600,
-            color: "#1a1a1a",
-            mb: 1,
-            minHeight: 48,
-          }}
-        >
-          {product.name}
-        </Typography>
+      {/* Contenido */}
+      <CardContent
+        sx={{
+          flexGrow: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          p: 3,
+        }}
+      >
+        <Box>
+          <Typography
+            variant="body2"
+            sx={{ color: "#888", mb: 1 }}
+          >
+            {product.category}
+          </Typography>
 
-        {/* Categoría */}
-        <Typography
-          variant="body2"
-          sx={{
-            color: "#888",
-            mb: 2,
-          }}
-        >
-          {product.category}
-        </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: 600,
+              color: "#111",
+              minHeight: 48,
+            }}
+          >
+            {product.name}
+          </Typography>
+        </Box>
 
-        {/* Precio + botón */}
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-        >
+        <Box mt={2}>
           <Typography
             variant="h6"
-            sx={{
-              fontWeight: 700,
-              color: "#111",
-            }}
+            sx={{ fontWeight: 700, mb: 1 }}
           >
             ${product.price}
           </Typography>
 
           <Button
+            fullWidth
             variant="contained"
-            size="small"
             onClick={() => addToCart(product)}
             sx={{
               borderRadius: "999px",
               textTransform: "none",
-              px: 2,
               backgroundColor: "#111",
               "&:hover": {
                 backgroundColor: "#333",
               },
             }}
           >
-            Añadir
+            Añadir al carrito
           </Button>
         </Box>
       </CardContent>
