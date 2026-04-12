@@ -3,8 +3,7 @@ import {
   Container,
   Grid,
   Typography,
-  Box,
-  Paper
+  Box
 } from "@mui/material";
 import products from "../data/products";
 import ProductCard from "../components/ProductCard";
@@ -20,43 +19,31 @@ const Home = () => {
   const filtered = useMemo(() => {
     return products.filter((p) => {
       const matchSearch = p.name.toLowerCase().includes(search.toLowerCase());
-      const matchCategory = category === "Todos" || p.category === category;
+      const matchCategory =
+        category === "Todos" || p.category === category;
       return matchSearch && matchCategory;
     });
   }, [search, category]);
 
   return (
-    <Box sx={{ bgcolor: "#f5f7fb", minHeight: "100vh", py: 4 }}>
+    <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh", py: 6 }}>
       <Container maxWidth="lg">
-        {/* HERO */}
-        <Paper
-          elevation={3}
+        
+        {/* Título */}
+        <Typography
+          variant="h4"
           sx={{
-            p: 4,
+            fontWeight: 700,
             mb: 4,
-            borderRadius: 4,
-            background: "linear-gradient(135deg, #1976d2, #42a5f5)",
-            color: "white",
+            color: "#111",
           }}
         >
-          <Typography variant="h4" fontWeight="bold">
-            Catálogo de Productos
-          </Typography>
-          <Typography variant="body1" sx={{ mt: 1 }}>
-            Compra fácil y rápido por WhatsApp 🚀
-          </Typography>
-        </Paper>
+          Catálogo
+        </Typography>
 
-        {/* FILTROS */}
-        <Paper
-          elevation={2}
-          sx={{
-            p: 3,
-            mb: 4,
-            borderRadius: 4,
-          }}
-        >
-          <Box mb={2}>
+        {/* Filtros */}
+        <Box sx={{ mb: 5 }}>
+          <Box sx={{ mb: 2 }}>
             <SearchBar search={search} setSearch={setSearch} />
           </Box>
 
@@ -65,10 +52,10 @@ const Home = () => {
             selected={category}
             setSelected={setCategory}
           />
-        </Paper>
+        </Box>
 
-        {/* PRODUCTOS */}
-        <Grid container spacing={3}>
+        {/* Grid */}
+        <Grid container spacing={4}>
           {filtered.map((product) => (
             <Grid
               item
