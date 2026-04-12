@@ -5,7 +5,7 @@ const products = [
     price: 1200,
     category: "Laptops",
     stock: 5,
-    image: "https://via.placeholder.com/200"
+    image: "https://res.cloudinary.com/dqkwc0kf7/image/upload/v1758651805/Screenshot_2025-09-23-13-22-02-735-edit_com.openai.chatgpt-removebg-preview_hetiij.png"
   },
   {
     id: 2,
